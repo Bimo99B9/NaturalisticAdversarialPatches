@@ -58,7 +58,7 @@ The easiest way to get started is by using the provided Docker container, which 
 ### Step 1: Clone the Repository
 
 ```bash
-git clone [https://github.com/Bimo99B9/NaturalisticAdversarialPatches](https://github.com/Bimo99B9/NaturalisticAdversarialPatches)
+git clone https://github.com/Bimo99B9/NaturalisticAdversarialPatches
 cd NaturalisticAdversarialPatches
 ```
 
