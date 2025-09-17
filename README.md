@@ -62,15 +62,7 @@ git clone https://github.com/Bimo99B9/NaturalisticAdversarialPatches
 cd NaturalisticAdversarialPatches
 ```
 
-### Step 2: Build the Docker Image
-
-Build the Docker image using the provided `Dockerfile`. This will install all necessary system libraries and Python packages.
-
-```bash
-docker build -t naturalistic-adversarial-patch .
-```
-
-### Step 3: Download Datasets
+### Step 2: Download Datasets
 
 The experiments in the paper use the **INRIA Person** and **MPII Human Pose** datasets. A script is provided to download and set up the INRIA dataset.
 
@@ -80,7 +72,7 @@ bash download_inria.sh
 
 This will create a `dataset/` directory and place the INRIA data inside.
 
-### Step 4: Download Pretrained GAN Weights
+### Step 3: Download Pretrained GAN Weights
 
 The patch generation process relies on a pre-trained BigGAN model. Run the following script to download the necessary weights.
 
@@ -89,6 +81,14 @@ bash ./GANLatentDiscovery/download_weights.sh
 ```
 
 The YOLO model weights are downloaded automatically by the `ultralytics` package when first used.
+
+### Step 4: Build the Docker Image
+
+Build the Docker image using the provided `Dockerfile`. This will install all necessary system libraries and Python packages.
+
+```bash
+docker build -t naturalistic-adversarial-patch .
+```
 
 ---
 
