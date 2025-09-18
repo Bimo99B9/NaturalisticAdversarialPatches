@@ -67,7 +67,7 @@ cd NaturalisticAdversarialPatches
 The experiments in the paper use the **INRIA Person** and **MPII Human Pose** datasets. A script is provided to download and set up the INRIA dataset.
 
 ```bash
-bash download_inria.sh
+bash setup_dataset.sh
 ```
 
 This will create a `dataset/` directory and place the INRIA data inside.
