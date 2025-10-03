@@ -1,4 +1,3 @@
-# Use an official PyTorch image as a parent image
 FROM pytorch/pytorch:1.8.1-cuda11.1-cudnn8-runtime
 
 # Set the working directory
@@ -18,13 +17,13 @@ COPY . /usr/src/app/
 # Upgrade the packaging tools
 RUN pip install --upgrade pip setuptools wheel
 
-# First, install dependencies for your own scripts (like torchsummary)
+# First, install dependencies
 RUN pip install -r requirements.txt
 
 # Now, install the ultralytics package itself in editable mode
 RUN pip install -e ./ultralytics
 
-# Define environment variable (optional)
+# Define environment variable
 ENV NAME="Naturalistic-Adversarial-Patch"
 
 # Define the default command

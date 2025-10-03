@@ -37,7 +37,7 @@ import argparse
 
 ### -----------------------------------------------------------    Setting     ---------------------------------------------------------------------- ###
 Gparser = argparse.ArgumentParser(description='Advpatch evaluation')
-Gparser.add_argument('--model', default='yolov5n', type=str, help='options : yolov2, yolov3, yolov4, fasterrcnn')
+Gparser.add_argument('--model', default='yolov5n', type=str, help='options : yolov2, yolov3, yolov4, fasterrcnn, yolov5n, yolov5s, yolov5m, yolov8n, yolov8s, yolov8m, yolov9t, yolov9s, yolov9m, yolov10n, yolov10s, yolov10m')
 Gparser.add_argument('--tiny', action='store_true', help='options :True or False')
 Gparser.add_argument('--patch', default='', help='patch location')
 # Gparser.add_argument('--model_size', default='n', help='model size')
@@ -66,7 +66,7 @@ enable_no_random           = True            # NOT random patch "light and shado
 enable_check_patch         = False           # check input patch by human
 # patch
 cls_id_attacked            = 0               # ID of the object to which the patch is posted
-patch_scale                = 0.0             # patch size
+patch_scale                = 0.2             # patch size
 max_labels_per_img         = 19              # maximum number of objects per image
 patch_mode                 = 0              # options: 0(patch), 1(white), 2(gray), 3(random)
 # fake_images_path           = "../adversarial-attack-ensemble/patch_sample/3output.png"
@@ -78,7 +78,7 @@ fake_images_path = apt1.patch
 # data source
 video_name                 = "WIN_20210113_18_36_46_Pro"     # WIN_20200903_16_52_27_Pro, WIN_20200903_17_17_34_Pro, WIN_20210113_18_36_46_Pro
 video_folder               = "./dataset/video/"
-source_folder              = "./dataset/mpii/images/"   # "./dataset/inria/Test/pos/"    # ../dataset/inria/Train/pos/   ,   ../dataset/inria/Test/pos/
+source_folder              = "./dataset/inria/Test/pos/"   # "./dataset/inria/Test/pos/" "./dataset/mpii/images/"   # ./dataset/inria/Train/pos/ 
 # video or folder
 source_key                 = 1     # 1:inria     0:video
 
@@ -88,8 +88,8 @@ if yolo_tiny==True and model_name!="yolov2":
     sss = model_name+"tiny"
 else:
     sss=model_name
-# label_labelRescale_folder = "./dataset/inria/Test/pos/yolo-labels-rescale_"+sss
-label_labelRescale_folder = "./dataset/mpii/labels/yolo-labels-rescale_"+sss
+label_labelRescale_folder = "./dataset/inria/Test/pos/yolo-labels-rescale_"+sss
+# label_labelRescale_folder = "./dataset/mpii/labels/yolo-labels-rescale_"+sss
 enable_show_map_process    = False
 
 # if model_name in ("yolov8", "yolov5"):
@@ -485,6 +485,7 @@ for i, filename in tqdm(enumerate(filenames), desc='Output video', total=nframes
             elif "yolov5" in model_name or "yolov8" in model_name or "yolov9" in model_name or "yolov10" in model_name:
                 # WARNING: This is hardcoded to label the dataset
                 # output_dir = f"dataset/mpii/labels/yolo-labels-rescale_{model_name}/"
+                # output_dir = f"dataset/inria/Test/pos/yolo-labels-rescale_{model_name}"
                 # os.makedirs(output_dir, exist_ok=True)
                 
                 # label_file = iname + ".txt"
@@ -559,8 +560,8 @@ for i, filename in tqdm(enumerate(filenames), desc='Output video', total=nframes
             if(output_data_type == "Train"):
                 labelfile_rescale.write("person" + str(f' {bbox[2]} {bbox[3]} {bbox[4]} {bbox[5]}\n'))            # left, top, right, bottom
             elif(output_data_type == "Test"):
-                # labelfile_rescale.write("person" + str(f' {bbox[1]} {bbox[2]} {bbox[3]} {bbox[4]} {bbox[5]}\n'))  # confendence left, top, right, bottom
-                labelfile_rescale.write("person" + str(f' {bbox[2]} {bbox[3]} {bbox[4]} {bbox[5]}\n'))  # left, top, right, bottom
+                labelfile_rescale.write("person" + str(f' {bbox[1]} {bbox[2]} {bbox[3]} {bbox[4]} {bbox[5]}\n'))  # confendence left, top, right, bottom
+                # labelfile_rescale.write("person" + str(f' {bbox[2]} {bbox[3]} {bbox[4]} {bbox[5]}\n'))  # left, top, right, bottom
         labelfile_rescale.close()
 
     # output video

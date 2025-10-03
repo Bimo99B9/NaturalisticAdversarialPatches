@@ -2,6 +2,7 @@ numpy
 matplotlib
 tqdm
 torchsummary
+torchvision
 tensorboardX
 scipy
 opencv-python

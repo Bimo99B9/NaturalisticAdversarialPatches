@@ -130,6 +130,16 @@ tensorboard --logdir=./exp
 
 ### Evaluating a Patch
 
+While the training is done using a Docker container, the evaluation requires a local Python environment with the necessary dependencies installed. You can use the provided `requirements_eval.txt` to set up a virtual environment. The project has been tested with Python 3.12. The PyTorch installation must be built with CUDA support. See [PyTorch's official site](https://pytorch.org/get-started/locally/) for installation instructions.
+
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+pip install -r requirements_eval.txt
+```
+
+_Feel free to make any necessary adjustments to the `requirements_eval.txt` file based on your system configuration, until `evaluation.py` runs without errors._
+
 To evaluate the effectiveness of a generated patch, use the `evaluation.py` script. The `run_eval_patch.sh` and `run_eval_all_patch.sh` scripts are provided to automate this process across multiple models.
 
 1.  Place your generated patch (e.g., `patch17.png`) in a `patch/` directory.
@@ -141,6 +151,13 @@ To evaluate the effectiveness of a generated patch, use the `evaluation.py` scri
 ```
 
 This script will call `evaluation.py` for each YOLO model variant (v5, v8, v9, v10 in n, s, m sizes) and test the specified patch. Results, including mAP scores, will be processed by the scripts.
+
+**Important notes about the evaluation:**
+- In the evaluation script, make sure to set the `patch_scale` appropriately (default is 0.20) in the parameters section. Using a patch scale of 0.0 disables the patch, and you will run the evaluation on clean images. The mAP will be 100% in this case. You can use it to verify that the labels are correctly generated.
+- The `patch_mode` parameter can be 0, 1, or 2. Using 0 applies the adversarial patch, while 1, 2, and 3 apply a white, gray, or random patch respectively. This allows you to compare the effectiveness of the adversarial patch against simple baselines.
+- `source_folder` and `label_labelRescale_folder` indicate the paths of the images and labels to be evaluated. These are currently configured for the INRIA test dataset. Please notice that if you want to evaluate on a different dataset, you will need to label it first for each model.
+
+---
 
 ### Live Camera Demo
 
